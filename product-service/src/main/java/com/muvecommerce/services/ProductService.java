@@ -1,6 +1,4 @@
-package com.muvecommerce.services
-
--service;
+package com.muvecommerce.services;
 
 import com.muvecommerce.dto.ProductRequest;
 import com.muvecommerce.dto.ProductResponse;
@@ -20,7 +18,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public void createProduct(ProductRequest productRequest) throws com.muvecommerce.services.ProductAlreadyExistsException {
+    public void createProduct(ProductRequest productRequest) throws ProductAlreadyExistsException {
 
         Optional<Product> existingProduct = productRepository.findByName(productRequest.getName());
         if (existingProduct.isEmpty()) {
@@ -34,7 +32,7 @@ public class ProductService {
         }
         else {
 
-            throw new com.muvecommerce.services.ProductAlreadyExistsException("Product with name '" + productRequest.getName() + "' already exists.");
+            throw new ProductAlreadyExistsException("Product with name '" + productRequest.getName() + "' already exists.");
         }
         log.info("Product Created Successfully{}", existingProduct);
 
